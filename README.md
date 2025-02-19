@@ -1,10 +1,10 @@
 # Intro to Dragon Data-Modules
 
-Dragon is a browser extension that visualizes the power concentrations in any token on the Solana blockchain. The extension is separated into "data-modules" that produce different analyses of a token's powerful holders. This initial release includes four data-modules, and the module of focus for this bounty is:
+Dragon is a browser extension that visualizes the power concentrations of any token on the Solana blockchain. The extension is separated into "data-modules" that produce different analyses on a token's holders. This initial release includes four data-modules, and the module of focus for this bounty is:
 
-- **Token Info/Security:** Basic token information such as ticker, age, market cap, and number of holders. Basic security measures such as mint authority, freeze authority, and locked liquidity pool.
   
-Soon, Dragon will provide data-modules analyzing many other kinds of power distributions for any token project in crypto.
+Soon, developers will contribute their own modules to Dragon based on what they think is important for traders to know when in the trenches. 
+
 
 ---
 
@@ -15,21 +15,21 @@ Soon, Dragon will provide data-modules analyzing many other kinds of power distr
   - [Contribution Overview](#contribution-overview)
   - [Folder Structure](#folder-structure)
   - [Setup \& Installation](#setup--installation)
-  - [Current Modules \& Bounties](#current-modules--bounties)
-    - [Token Info Analysis](#token-info-analysis)
-    - [Data Field Explanations](#data-field-explanations)
-  - [Using Helius RPC for Open Source Integration](#using-helius-rpc-for-open-source-integration)
-  - [Future Bounties \& Modules](#future-bounties--modules)
+  - [Module Details](#module-details)
+  - [Bounty Selection Criteria](#bounty-selection-criteria)
+  - [Using Helius RPC for Integration](#using-helius-rpc-for-integration)
   - [Contributing](#contributing)
+  - [Future Bounties](#future-bounties)
+  - [Issues](#issues)
   - [License](#license)
 
 ---
 
 ## Contribution Overview
 
-Dragon is built with the vision to make data accessible and community-driven. Soon, developers will contribute new modules based on what they think is important to know in the trenches. First, we require an upgrade to the initial four modules that currently gather data by web-scraping online. The challenge then (and bounty) is to build an efficient data pipeline that integrates a module with a Solana RPC (ie. [Helius](https://www.helius.dev)).
+Each of Dragon's first four modules currently gathers data by web-scraping TrenchyBot, TrenchRadar, and Bubblemaps. The task is to build a pipeline that connects the Token Info module with a Solana RPC (ie. [Helius](https://www.helius.dev)) and replace all scrapes. If any data can not be retrieved from the RPC, the developer can use whatever means necessary given the goals stated in [Module Details](#module-details) below.
 
-By replacing web-scrapes with RPC calls, Dragon will provide real-time data streaming and unbeatable companionship for traders in the trenches.
+By fetching real-time data directly from a node, Dragon will become an unbeatable companion in the trenches.
 
 ---
 
@@ -82,14 +82,14 @@ dragon-data-modules/
 
 ## Setup & Installation
 
-1. **Clone the Repository:**
+1. **Clone the repository.**
 
    ```bash
    git clone https://github.com/alpha-dragon-dev/dragon-module1-tokeninfo.git
    cd dragon-module1-tokeninfo
    ```
 
-2. **Install Dependencies:**
+2. **Install dependencies.**
 
    Install all required Node.js packages by running:
 
@@ -97,7 +97,7 @@ dragon-data-modules/
    npm install
    ```
 
-3. **Configure the Application:**
+3. **Configure the application.**
 
    Open `src/config/config.js` and update the following parameters as needed:
 
@@ -105,7 +105,7 @@ dragon-data-modules/
    - `TELEGRAM_API_ID` and `TELEGRAM_API_HASH`: Replace with your Telegram API credentials.
    - `HELIUS_RPC_URL`: Update with your Helius RPC endpoint and API key. This endpoint is used for blockchain data queries.
 
-4. **Run the Servers:**
+4. **Run the servers.**
 
    Start the API server in one terminal:
 
@@ -113,12 +113,13 @@ dragon-data-modules/
    npm start
    ```
 
-   And then start the Telegram client (which also includes a small Express server) in another terminal:
+   Then start the Telegram client (which also includes a small Express server) in another terminal:
 
    ```bash
    npm run telegram
    ```
-5. **To View Results on Frontend:**
+5. **View results in testing environment.**
+
    Start the API server to fetch data from backend:
 
    ```bash
@@ -138,150 +139,88 @@ dragon-data-modules/
 
 ## Module Details
 
- The details for this module are outlined below:
+- **Module Name:**  
+- **Bounty:** 0.xx% of $DRAGON supply  
+- **Goals:** Retrieve all data below in real-time and with extremely high accuracy.
 
-- **Module Name:** Token Info  
-- **Bounty:** 0.20% of $DRAGON supply  
-- **Details:** Front end is built. Need an RPC pipeline via Helius node. Data to get includes: Ticker, Thumbnail image, Token age, Market cap, # of holders, and more.
+### Data To Fetch
 
----
 
-### Data Field Explanations
+### Module Output
 
-1. **Thumbnail**  
-   The image that was chosen to represent the token.
-
-2. **Ticker**  
-   The symbol that was chosen for the token.  
-   **Example Output:** `$Prawn`
-
-3. **Age**  
-   How long the token has been in existence. At the moment, the front end is displayed in units from hours to years. In the back-end we are looking to increases precision to include minutes. At the moment, the front-end will only show 0 hours if the token is less than 1 hour old.
-   **Example Output:** `23 hrs 4 mins` (front-end: 23 h)
-   **Example Output:** `23 mins` (front-end: 0 h)
-   **Example Output:** `9 months 21 days 4 hours 15 mins` (front-end: 9 m)
-   
-5. **Holders**  
-   The number of distinct wallet addresses currently holding the token. At the moment, the front-end will only show ">150" but that will be updated after this bounty.
-   **Example Output:** `9,088` (front-end: >150)
-   **Example Output:** `141` (front-end: 141)
-
-7. **CTO or Dev**  
-   Indicates if the token is a "community take over" as defined by CTO pur on DEX Screener or is still developer-led.  
-   **Example Output:** `Dev`
-
-8. **Market Cap**  
-   The total value (in USD) of the token supply in circulation.  
-   **Example Output:** `$584,887`
-
-9. **Mint Authority**  
-   Specifies whether the authority to mint (create) additional tokens has been revoked.  
-   **Example Output:** `Mint`
-
-10. **Freeze Authority**  
-   Specifies whether the authority to freeze or lock token transfers has been revoked.  
-   **Example Output:** `Freeze`
-
-11. **Liquidity Locked**  
-   Shows whether the liquidity pool has been locked, usually by burning the LP tokens.  
-   **Example Output:** `Locked`
-
-12. **DEX Screener Paid**  
-    Indicates if fees have been paid to DEX Screener to officially host the project's socials and materials.  
-    **Example Output:** `Dex`
-
-13. **Photon Link**  
-    A link to the token's chart on Photon.  
-    **Example Output:** `Link`
-
-14. **Pump.fun Link**  
-    A link to the token's page on Pump.fun (if applicable).  
-    **Example Output:** `Link`
-
-15. **Solscan Link**  
-    A link to the token’s contract on the Solscan block explorer.  
-    **Example Output:** `Link`
-
-16. **DEX Screener Link**  
-    A link to the token's chart on DEX Screener.  
-    **Example Output:** `Link`
-
-17. **Twitter Link**  
-    A link to the official Twitter account for the token project.  
-    **Example Output:** `Link`
-
-18. **Telegram Link**  
-    A link to the official Telegram community for the token project.  
-    **Example Output:** `Link`
-
-19. **Website Link**  
-    A link to the official website for the token project.  
-    **Example Output:** `Link`
+We have included a testing environment where you can see your live code displayed in the module. The live module will be interactive, meaning you can hover to reveal the metadata you retrieved as well.
 
 ---
 
-## Using Helius RPC for Open Source Integration
+## Bounty Selection Criteria
 
-Helius is a powerful RPC service that enables quick and direct access to on-chain data on Solana. By integrating Helius RPC calls into our modules, we can:
-
-- **Replace Slow Web-Scraping:** Instead of relying solely on web-scraping methods, modules such as Token Info Analysis and Sniper Analysis can fetch real-time data directly from the blockchain.
-- **Enhance Data Accuracy:** Helius provides accurate and up-to-date blockchain metrics (e.g., token supply, market cap, holder counts).
-- **Quick Response Times:** The use of Helius RPC ensures fast responses, which is essential for real-time updates in the front-end extension.
-
-**How to Update the Current Code:**
-- **Modify the Stub Functions:** In files like `src/modules/tokenInfo.js` and `src/modules/sniperAnalysis.js`, update the stub implementations to call the appropriate Helius RPC endpoints.
-- **Leverage Configured Endpoints:** Use the `HELIUS_RPC_URL` from `src/config/config.js` to ensure that your RPC calls are directed to the correct endpoint with your API key.
-- **Improve Performance:** Integrate caching or batching of RPC calls if necessary to further improve response times for the front-end.
+We will select a recipient for this bounty based on the following criteria, in order of evaluation:
+1. A fully complete retrieval of the data outlined in [Module Details](#module-details)
+2. The highest accuracy for data retrieved in real-time
+3. The fastest speed for data retrieval
+4. If there is more than one developer to meet the above criteria, the first pull request will receive the bounty
 
 ---
 
-## Future Bounties & Modules
+## Using Helius RPC for Integration
 
-Dragon is an evolving project. In addition to the current four modules, future bounties will include:
+[Helius](https://www.helius.dev) is a powerful RPC service that enables quick and direct access to on-chain data on Solana. By integrating Helius RPC calls into Dragon's data-modules, we can **replace slow web-scraping techniques** and **increase data accuracy.** 
 
-- **Deception Metrics Module:** Analyze deceptive practices in token projects and flag potential red flags.
-- **Holder Distribution Analysis:** Provide a detailed breakdown of token holders, including concentration analysis.
-- **Liquidity Analysis:** Monitor and report on liquidity pool dynamics and trading activities.
-- **Community Sentiment Analysis:** Integrate social media and on-chain data to gauge community sentiment.
-- **New Metrics Modules:** Based on community feedback and emerging trends, new modules can be crowd-sourced and developed.
+**How to update the code**
+- **Modify the stub functions:** In files like `src/modules/tokenInfo.js` and `src/api/server.js`, update the stub implementations to call the appropriate Helius RPC endpoints.
+- **Leverage the configured endpoints:** Use the `HELIUS_RPC_URL` from `src/config/config.js` to ensure that your RPC calls are directed to the correct endpoint with your API key.
+- **Improve performance:** Integrate batching of RPC calls if necessary to further improve response time.
 
-These future modules will be developed by community contributions and bounty rewards. If you have a new idea or module that could benefit the Dragon ecosystem, feel free to propose it and start working on a bounty.
+*Note:* If any data can not be retrieved from RPC, or if data can be faster retrieved via another method such as data streams, the developer can implement the alternative method with a brief explanation for their choice.
 
 ---
 
 ## Contributing
 
-We welcome contributions from the community! To contribute:
+1. **Fork the repository.**
 
-1. **Fork the Repository**
-
-2. **Create a Feature Branch:**
+2. **Create a feature branch.**
 
    ```bash
-   git checkout -b feature/new-module
+   git checkout -b feature/updated-module
    ```
 
-3. **Commit Your Changes:**
+3. **Replace** `server.js`, `tokenInfo.js`, `apiUtils.js`, **and** `telegramUtils.js` **with your stub functions.**
+
+
+4. **Commit your changes.**
 
    ```bash
-   git commit -am 'Add new module for XYZ'
+   git commit -am 'Add updated module for XYZ'
    ```
 
-4. **Push the Branch:**
+5. **Push the branch.**
 
    ```bash
-   git push origin feature/new-module
+   git push origin feature/updated-module
    ```
 
-5. **Open a Pull Request** describing your changes and the module you are adding.
-
+6. **Open a pull request describing your changes and the code you have contributed.**
 
 ---
 
+## Future Bounties
+
+Dragon’s aim is to make token analyses more transparent and community-driven. After the initial four modules, bounties will expand to include more data-modules on holder analyses and deception analyses on token supply.
+
+If you have an idea for a data-module that could benefit traders in the trenches, please propose it [here](https://github.com/alpha-dragon-org/dragon-module-openIdeas) to be considered for a bounty.
+
+---
+## Issues
+
+Please report any software “bugs” or other problems with this module through the issues tab here: [github.com/alpha-dragon-org/dragon-module1-tokeninfo](https://github.com/alpha-dragon-org/dragon-module1-tokeninfo)
+
+---
 ## License
 
-This project is open source and available under the MIT License.
-
-Happy coding and bounty hunting!
-Build Mods, Collect Bounties.
+This project is open source and available under [the MIT License](https://opensource.org/license/mit).
 Contribute to Dragon and help reveal the hidden techniques in token projects on Solana.
+
+---
+<img src="https://github.com/alpha-dragon-org/dragon-module1-tokeninfo/blob/main/frontend/public/images/logo.gif?raw=true" width="200">
+Want to meet the project co-founders?
