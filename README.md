@@ -1,15 +1,13 @@
-# Intro to Dragon Data-Modules
+# Welcome to the Dragon Community
 
-Dragon is a browser extension that visualizes the power concentrations of any token on the Solana blockchain. The extension is separated into "data-modules" that produce different analyses on a token's holders. This initial release includes four data-modules, and the module of focus for this bounty is:
+This repo was designed solely for the purpose of community collaboration in developing the future modules for the Dragon extension. Please take a moment to familiarize with the announcements found in [Discussions](https://github.com/alpha-dragon-org/dragon-community-openIdeas/discussions/categories/announcements).
 
-  
-Soon, developers will contribute their own modules to Dragon based on what they think is important for traders to know when in the trenches. 
-
-
----
-<img src="https://github.com/alpha-dragon-org/dragon-module1-tokeninfo/blob/main/frontend/public/images/logo.gif?raw=true" width="200">
-Want to meet the project co-founders?
+[Telegram](https://t.me/+OU0SLVfcpEZhZWQx)  
+[Website](https://alpha-dragon.ai/)  
+[GitBook](https://dragon-12.gitbook.io/alpha-dragon)  
 
 
-https://github.com/user-attachments/assets/4c8fbc5d-fce5-4835-86f0-1cb50105988b
+
+<img src="https://github.com/alpha-dragon-org/dragon-module1-tokeninfo/blob/main/frontend/public/images/logo.gif?raw=true" width="500">
+
 
