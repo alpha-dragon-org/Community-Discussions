@@ -9,3 +9,7 @@ Soon, developers will contribute their own modules to Dragon based on what they 
 ---
 <img src="https://github.com/alpha-dragon-org/dragon-module1-tokeninfo/blob/main/frontend/public/images/logo.gif?raw=true" width="200">
 Want to meet the project co-founders?
+
+
+https://github.com/user-attachments/assets/4c8fbc5d-fce5-4835-86f0-1cb50105988b
+
