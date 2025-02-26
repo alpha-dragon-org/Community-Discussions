@@ -1,7 +1,8 @@
 # Welcome to the Dragon Community
 
-This repo was designed solely for the purpose of community collaboration in developing the future modules for the Dragon extension. Please take a moment to familiarize with the announcements found in [Discussions](https://github.com/alpha-dragon-org/dragon-community-openIdeas/discussions/categories/announcements).
+This repo was designed solely for the [Discussions](https://github.com/alpha-dragon-org/dragon-community-openIdeas/discussions/categories/announcements).
 
+Let's use this as a place to share ideas for future modules. For the time being!
 
 <img src="https://github.com/alpha-dragon-org/dragon-module1-tokeninfo/blob/main/frontend/public/images/logo.gif?raw=true" width="500">
 
